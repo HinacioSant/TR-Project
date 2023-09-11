@@ -1,0 +1,23 @@
+{% extends "TR/base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<h1>Index</h1>
+<form action="/tr" method="POST" class="row">
+{% csrf_token %}
+<div class="input-group">
+  <input type="text" class="form-control" id="summoner" name="summoner" aria-label="Summoner Name" placeholder="Summoner Name">
+  <select class="form-select btn" name="region" id="region">
+    <option selected>Region</option>
+    <option value="NA1">NA</option>
+    <option value="BR1">BR</option>
+    <option value="EU1">Eu</option>
+  </select>
+</div>
+<div class="col-auto" style="margin-right:auto">
+    <button type="submit" class="btn btn-primary">Search</button>
+</div>
+</form>
+
+{% endblock %}

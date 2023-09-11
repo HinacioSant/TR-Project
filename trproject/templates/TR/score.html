@@ -1,0 +1,68 @@
+{% extends "TR/base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+{% if error %}
+  {{error}}
+{% else %}
+<p>TIME:{{elapsed_time}}</p>
+<p>PROCESS TIME:{{elapsed_timep}}</p>
+
+<h6>Your And Your Lane Opponent Stats</h6>
+<h6>Game Duration: {{gameDuration}} Minutes</h6>
+
+<div class="table_div">
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="row">Score</th>
+      <td>{{p_user.score}}</td>
+    </tr>
+    {% for key, value in p_user.context.items %}
+    <tr>
+      <th scope="row">{{key}}</th>
+      {% if value == 0 and key != 'Win' %}
+        <td>None</td>
+      {% else %}
+        <td>{{value}}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<table class="table">
+  <tbody class="opp_table">
+    <tr>
+      <td>{{opp.score}}</td>
+    </tr>
+    {% for key, value in opp.context.items %}
+    <tr>
+      {% if value == 0 and key != 'Win' %}
+        <td>None</td>
+      {% else %}
+        <td>{{value}}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</div>
+
+{% endif %}
+{% endblock %}
+
+
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script>
+ const dict = {{ p_user }}
+console.log(dict)
+
+
+</script>
+
+{% load static %}
+<script src="{% static 'js/score.js' %}"></script>
+{% endblock %}
